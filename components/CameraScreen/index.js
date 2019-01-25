@@ -17,7 +17,7 @@ export default class App extends React.Component {
 		const { navigate } = this.props.navigation;
 		if (this.camera) {
 			let photo = await this.camera.takePictureAsync({skipProcessing: true, autoFocus: false, base64: true});
-			fetch('http://192.168.0.192:5000/recognize', {
+			fetch('http://10.255.15.148:5000/recognize', {
 				method: 'POST',
 				body: JSON.stringify({
 					image: photo.base64
@@ -25,6 +25,7 @@ export default class App extends React.Component {
 			})
 			.then(resp => resp.json())
 			.then(resp => {
+				console.warn('WORKS');
 				console.warn(resp);
 				navigate('ResultScreen', resp);
 			})
